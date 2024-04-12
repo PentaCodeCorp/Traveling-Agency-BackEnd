@@ -1,7 +1,7 @@
 export class UpdateStaffDto {
     name?: string;
     surname?: string;
-    citizenId?: string;
+    citizen_id?: string;
     age?: number;
     sex?: string;
     username?: string;

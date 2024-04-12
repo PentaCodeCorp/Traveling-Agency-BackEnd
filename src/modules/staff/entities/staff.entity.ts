@@ -5,27 +5,27 @@ export class Staff {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   surname: string;
 
-  @Column()
-  citizenId: string;
+  @Column({ nullable: true })
+  citizen_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   age: number;
 
-  @Column()
+  @Column({ nullable: true })
   sex: string;
 
-  @Column()
+  @Column({ nullable: true })
   username: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string; // Hashed password by bcrypt
 
-  @Column()
-  loginToken: string;
+  @Column({ nullable: true })
+  login_token: string;
 }
