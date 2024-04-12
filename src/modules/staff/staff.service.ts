@@ -22,7 +22,7 @@ export class StaffService {
   }
 
   async findOne(id: number): Promise<Staff> {
-    return this.staffRepository.findOne(id);
+    return this.staffRepository.findOneBy({id: id});
   }
 
   async update(id: number, updateStaffDto: UpdateStaffDto): Promise<Staff> {

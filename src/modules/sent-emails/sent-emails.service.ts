@@ -22,7 +22,7 @@ export class SentEmailsService {
   }
 
   async findOne(id: number): Promise<SentEmail> {
-    return this.sentEmailRepository.findOne(id);
+    return this.sentEmailRepository.findOneBy({id: id});
   }
 
   async update(id: number, updateSentEmailDto: UpdateSentEmailDto): Promise<SentEmail> {

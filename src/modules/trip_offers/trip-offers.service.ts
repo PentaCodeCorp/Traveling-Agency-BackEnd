@@ -22,7 +22,7 @@ export class TripOffersService {
   }
 
   async findOne(id: number): Promise<TripOffer> {
-    return this.tripOfferRepository.findOne(id);
+    return this.tripOfferRepository.findOneBy({id: id});
   }
 
   async update(id: number, updateTripOfferDto: UpdateTripOfferDto): Promise<TripOffer> {
