@@ -17,11 +17,6 @@ export class BookingsController {
     return this.bookingsService.findAll();
   }
 
-  @Get('/newest')
-  async findNewest() {
-    return this.bookingsService.findNewest();
-  }
-
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.bookingsService.findOne(+id);

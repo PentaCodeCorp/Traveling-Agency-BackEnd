@@ -17,6 +17,11 @@ export class TripOffersController {
     return this.tripOffersService.findAll();
   }
 
+  @Get('/newest')
+  async findNewest() {
+    return this.tripOffersService.findNewest();
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.tripOffersService.findOne(+id);
