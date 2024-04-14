@@ -121,6 +121,8 @@ export class AppService {
       + '  "basePrice": 1200,                                                      <br/>'
       + '  "pricePerAdditionalService": 60                                         <br/>'
       + '}                                                                         <br/>'
+      + '                                                                              <br/>'
+      + 'Copyright Harun Čehajić, Aldin Kulaglić 2024'
       ;
   }
 }
