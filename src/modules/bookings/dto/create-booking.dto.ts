@@ -6,4 +6,6 @@ export class CreateBookingDto {
     age: number;
     residentCountry: string;
     sex: string;
+    tripDate: Date;
+    tripDuration: number;
   }

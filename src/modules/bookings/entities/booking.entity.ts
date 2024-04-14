@@ -25,4 +25,10 @@ export class Booking {
 
   @Column()
   sex: string;
+
+  @Column()
+  tripDate: Date;
+
+  @Column()
+  tripDuration: number;
 }

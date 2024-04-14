@@ -21,6 +21,10 @@ export class BookingsService {
     return this.bookingRepository.find();
   }
 
+  async findNewest(): Promise<Booking[]> {
+    return (await this.bookingRepository.find()).sort((a, b) => a.tripDate.getTime() - b.tripDate.getTime()).slice(0, 10);
+  }
+
   async findOne(id: number): Promise<Booking> {
     const booking = await this.bookingRepository.findOneBy({id: id});
     if (!booking) {
