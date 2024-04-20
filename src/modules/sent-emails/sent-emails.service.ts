@@ -4,17 +4,49 @@ import { Repository } from 'typeorm';
 import { SentEmail } from './entities/sent-email.entity';
 import { CreateSentEmailDto } from './dto/create-sent-email.dto';
 import { UpdateSentEmailDto } from './dto/update-sent-email.dto';
+import { ConfigService } from '@nestjs/config';
+import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class SentEmailsService {
+
+  private transporter;
+
   constructor(
     @InjectRepository(SentEmail)
     private readonly sentEmailRepository: Repository<SentEmail>,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    // Set up nodemailer transporter
+    this.transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      auth: {
+        user: this.configService.get<string>('GMAIL_USER'),
+        pass: this.configService.get<string>('GMAIL_PASSWORD'),
+      },
+    });
+  }
 
   async create(createSentEmailDto: CreateSentEmailDto): Promise<SentEmail> {
     const sentEmail = this.sentEmailRepository.create(createSentEmailDto);
-    return this.sentEmailRepository.save(sentEmail);
+
+    // Send email using nodemailer
+    const mailOptions = {
+      from: this.configService.get<string>('GMAIL_USER'),
+      to: sentEmail.to,
+      subject: sentEmail.subject,
+      text: sentEmail.content,
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      return this.sentEmailRepository.save(sentEmail);
+    } catch (error) {
+      // Handle error
+      throw new Error('Failed to send email: ' + error);
+    }
   }
 
   async findAll(): Promise<SentEmail[]> {
